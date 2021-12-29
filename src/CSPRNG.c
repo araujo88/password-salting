@@ -3,34 +3,7 @@
 #include <string.h>
 #include <stdint.h>
 #include "CSPRNG.h"
-
-#define BUFFER_SIZE 2048
-
-void removeChar(char *str, char garbage)
-{
-
-    char *src, *dst;
-    for (src = dst = str; *src != '\0'; src++)
-    {
-        *dst = *src;
-        if (*dst != garbage)
-            dst++;
-    }
-    *dst = '\0';
-}
-
-char *subString(const char *input, int offset, int len, char *dest)
-{
-    int input_len = strlen(input);
-
-    if (offset + len > input_len)
-    {
-        return NULL;
-    }
-
-    strncpy(dest, input + offset, len);
-    return dest;
-}
+#include "utils.h"
 
 void CSPRNG(unsigned int size, char salt[size])
 {

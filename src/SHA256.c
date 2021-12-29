@@ -1,17 +1,8 @@
-// Simple demonstration of SHA-256 for one chunk (only one iteration).
-// Input is limited less than 56 bytes.
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "SHA256.h"
-
-#define _2E32 4294967296
-#define SIZE 64
-
-unsigned int _rotl(const unsigned int value, int shift);
-unsigned int _rotr(const unsigned int value, int shift);
-unsigned int concatenate_bits(unsigned int b1, unsigned int b2, unsigned int b3, unsigned int b4);
+#include "utils.h"
 
 /* Note 1: All variables are 32 bit unsigned integers and addition is calculated modulo 2^32
 Note 2: For each round, there is one round constant k[i] and one entry in the message schedule array w[i], 0 ≤ i ≤ 63
@@ -137,24 +128,4 @@ void SHA256(char message[SIZE], char digest[256])
 
     // Final step - concatenate
     sprintf(digest, "%x%x%x%x%x%x%x%x", h0, h1, h2, h3, h4, h5, h6, h7);
-}
-
-unsigned int _rotl(const unsigned int value, int shift)
-{
-    if ((shift &= sizeof(value) * 32 - 1) == 0)
-        return value;
-    return (value << shift) | (value >> (sizeof(value) * 32 - shift));
-}
-
-unsigned int _rotr(const unsigned int value, int shift)
-{
-    if ((shift &= sizeof(value) * 32 - 1) == 0)
-        return value;
-    return (value >> shift) | (value << (sizeof(value) * 32 - shift));
-}
-
-unsigned int concatenate_bits(unsigned int b1, unsigned int b2, unsigned int b3, unsigned int b4)
-{
-
-    return (b4) | (b3 << 8) | (b2 << 16) | (b1 << 24);
 }
