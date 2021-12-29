@@ -1,6 +1,6 @@
 # password-salting
 
-Password salting example written in C utilizing hashing algorithm SHA-256 (SHA-2). Developed for educational purposes only.
+Password salting example written in C utilizing hashing algorithm SHA-256 (SHA-2). Developed for educational purposes only. THIS ALGORITHM HAS NOT BEEN TESTED AND AUDITED, SO DON'T USE IT ON A REAL APPLICATION!
 
 ## Compiling
 
