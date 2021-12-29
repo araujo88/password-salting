@@ -3,6 +3,29 @@
 #include <string.h>
 #include "utils.h"
 
+void append(char *string, unsigned int *length, char c)
+{
+    *length = *length + 1;
+    string = (char *)realloc(string, (*length) * sizeof(char));
+    string[*length - 1] = c;
+}
+
+void print_hash_hex(unsigned int *hash, unsigned int size)
+{
+    int i;
+
+    for (i = 0; i < size; i++)
+    {
+        if (i % (size / 8) == 0)
+        {
+            printf("\n");
+        }
+
+        printf(" %02x", hash[i]);
+    }
+    printf("\n\n");
+}
+
 void removeChar(char *str, char garbage)
 {
 

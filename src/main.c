@@ -17,30 +17,28 @@ int main(int argc, char *argv[])
     unsigned int work_factor;
     char password[strlen(argv[1])];
     char salt[SALT_SIZE];
-    char digest[2 * SALT_SIZE];
+    char digest[SIZE];
     unsigned int i;
 
     strncpy(password, argv[1], strlen(argv[1]));
     password[strlen(argv[1])] = '\0';
     printf("Password: %s\n", password);
 
-    // work_factor = atoi(argv[2]);
-    work_factor = 1;
+    work_factor = atoi(argv[2]);
     printf("Work factor: %u\n", work_factor);
 
     CSPRNG(32, salt);
     printf("Generated salt: %s\n", salt);
 
-    char salted_password[SALT_SIZE + strlen(password)];
+    char salted_password[SIZE];
     sprintf(salted_password, "%s%s", password, salt);
     printf("Salted password: %s\n", salted_password);
-    salted_password[64] = '\0';
 
     for (i = 0; i < work_factor; i++)
     {
         SHA256(salted_password, digest);
         printf("Hashed salted password (SHA-256 - SHA-2): %s - iteration %u\n", digest, i);
-        strcpy(salted_password, digest);
+        memcpy(salted_password, digest, SIZE);
         salted_password[64] = '\0';
     }
 
