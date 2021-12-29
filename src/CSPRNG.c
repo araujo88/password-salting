@@ -45,7 +45,7 @@ void CSPRNG(unsigned int size, char salt[size])
     removeChar(salt_s, ' ');
 
     strcpy(salt, salt_s);
-    salt[2 * size] = '\0';
+    salt[size] = '\0';
 
     // Closes pipeline
     pclose(fp);

@@ -1,5 +1,6 @@
 CC=gcc
 CC_FLAGS=-g -Wall
+CC_LIBS=-lm
 
 SRC_DIR=src
 HDR_DIR=include/

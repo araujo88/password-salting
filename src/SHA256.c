@@ -40,8 +40,8 @@ void SHA256(char *string, char digest[64])
 
     int i, it, j = 0;
 
-    printf("Initial length: %d\n", length - 1);
-    printf("Initial string: %s\n", string);
+    // printf("Initial length: %d\n", length - 1);
+    // printf("Initial string: %s\n", string);
 
     // Step 3 - pad data with zeros
 
@@ -58,8 +58,8 @@ void SHA256(char *string, char digest[64])
 
     strcpy(message, string);
 
-    printf("Message: %s\n", message);
-    printf("Final length: %d\n", length);
+    // printf("Message: %s\n", message);
+    // printf("Final length: %d\n", length);
 
     for (i = 0; i < length; i++)
     {
@@ -71,29 +71,29 @@ void SHA256(char *string, char digest[64])
         WORD[j] = (unsigned int)message[j];
         j++;
     }
-    print_hash_hex(WORD, length);
-    printf("\n\n");
+    // print_hash_hex(WORD, length);
+    // printf("\n\n");
 
     WORD[j] = 0b10000000;
-    print_hash_hex(WORD, length);
+    // print_hash_hex(WORD, length);
 
     WORD[length - 1] = strlen(string) * sizeof(char) * 8;
-    print_hash_hex(WORD, length);
+    // print_hash_hex(WORD, length);
 
     unsigned int max_it = length / SIZE;
 
-    printf("Max iterations: %u\n", max_it);
+    // printf("Max iterations: %u\n", max_it);
 
     for (it = 0; it < max_it; it++)
     {
-        printf("Compressing loop %d\n", it + 1);
+        // printf("Compressing loop %d\n", it + 1);
         unsigned int subword[SIZE];
         for (j = 0; j < SIZE; j++)
         {
             subword[j] = WORD[j + it * SIZE];
         }
 
-        print_hash_hex(subword, SIZE);
+        // print_hash_hex(subword, SIZE);
 
         for (i = 0; i < SIZE; i++)
         {
@@ -101,15 +101,15 @@ void SHA256(char *string, char digest[64])
         }
 
         // ****** Print ******* //
-        for (i = 0; i < SIZE; i++)
-        {
-            printf("%08x ", w[i]);
-            if ((i + 1) % 8 == 0)
-            {
-                printf("\n");
-            }
-        }
-        printf("\n");
+        // for (i = 0; i < SIZE; i++)
+        // {
+        //     printf("%08x ", w[i]);
+        //     if ((i + 1) % 8 == 0)
+        //     {
+        //         printf("\n");
+        //     }
+        // }
+        // printf("\n");
         // ******************** //
 
         // Step 5 - Copy data from step 1 into new array with 32-bits words
@@ -124,15 +124,15 @@ void SHA256(char *string, char digest[64])
         }
 
         // ****** Print ******* //
-        for (i = 0; i < SIZE; i++)
-        {
-            printf("%08x ", w[i]);
-            if ((i + 1) % 8 == 0)
-            {
-                printf("\n");
-            }
-        }
-        printf("\n");
+        // for (i = 0; i < SIZE; i++)
+        // {
+        //     printf("%08x ", w[i]);
+        //     if ((i + 1) % 8 == 0)
+        //     {
+        //         printf("\n");
+        //     }
+        // }
+        // printf("\n");
         // ******************** //
 
         // Step 6 - Modify the zero-ed indexes at the end of the array
@@ -145,15 +145,15 @@ void SHA256(char *string, char digest[64])
         }
 
         // ****** Print ******* //
-        for (i = 0; i < SIZE; i++)
-        {
-            printf("%08x ", w[i]);
-            if ((i + 1) % 8 == 0)
-            {
-                printf("\n");
-            }
-        }
-        printf("\n");
+        // for (i = 0; i < SIZE; i++)
+        // {
+        //     printf("%08x ", w[i]);
+        //     if ((i + 1) % 8 == 0)
+        //     {
+        //         printf("\n");
+        //     }
+        // }
+        // printf("\n");
         // ******************** //
 
         // Step 7 - Compression
@@ -199,5 +199,5 @@ void SHA256(char *string, char digest[64])
 
     // Final step - concatenate
     sprintf(digest, "%08x%08x%08x%08x%08x%08x%08x%08x", h0, h1, h2, h3, h4, h5, h6, h7);
-    printf("Digest length: %lu\n", strlen(digest));
+    // printf("Digest length: %lu\n", strlen(digest));
 }
